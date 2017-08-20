@@ -1,10 +1,9 @@
 import React from 'react';
 import './App.css';
 import BusinessList from './components/businesslist/businesslist';
-import Business from './components/business/business';
 import SearchBar from './components/SearchBar/SearchBar';
 import Yelp from './util/Yelp';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 
 // const business = {
 // 	imageSrc: 'https://s3.amazonaws.com/codecademy-content/programs/react/ravenous/pizza.jpg',
