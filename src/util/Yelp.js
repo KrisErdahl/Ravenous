@@ -5,21 +5,40 @@ let accessToken = '';
 const Yelp = {
 	getAccessToken() {
 		if (accessToken) {
-			return new Promise(resolve => {
-				resolve(accessToken);
-			});
-			const tokenUrl = 'https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=';
-			return fetch(`https://cors-anywhere.herokuapp.com/${tokenUrl}${clientId}&client_secret=${secret}`, {
-				method: 'POST'
-			})
-				.then(response => {
-					return response.json();
-				})
-				.then(jsonResponse => {
-					accessToken = jsonResponse.access_token;
-				});
+			return new Promise(resolve => resolve(accessToken));
 		}
+		return fetch(
+			`https://cors-anywhere.herokuapp.com/https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=${clientId}&client_secret=${secret}`,
+			{
+				method: 'POST'
+			}
+		)
+			.then(response => {
+				return response.json();
+			})
+			.then(jsonResponse => {
+				accessToken = jsonResponse.access_token;
+			});
 	},
+	// getAccessToken() {
+	// 	if (accessToken) {
+	// 		return new Promise(resolve => {
+	// 			resolve(accessToken);
+	// 		});
+	// 		return fetch(
+	// 			`https://cors-anywhere.herokuapp.com/https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=${clientId}&client_secret=${secret}`,
+	// 			{
+	// 				method: 'POST'
+	// 			}
+	// 		)
+	// 			.then(response => {
+	// 				return response.json();
+	// 			})
+	// 			.then(jsonResponse => {
+	// 				accessToken = jsonResponse.access_token;
+	// 			});
+	// 	}
+	// },
 	search(term, location, sortBy) {
 		return Yelp.getAccessToken()
 			.then(() => {
