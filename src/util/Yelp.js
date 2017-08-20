@@ -13,12 +13,8 @@ const Yelp = {
 				method: 'POST'
 			}
 		)
-			.then(response => {
-				return response.json();
-			})
-			.then(jsonResponse => {
-				accessToken = jsonResponse.access_token;
-			});
+			.then(response => response.json())
+			.then(jsonResponse => (accessToken = jsonResponse.access_token));
 	},
 	// getAccessToken() {
 	// 	if (accessToken) {
@@ -51,9 +47,7 @@ const Yelp = {
 					}
 				);
 			})
-			.then(response => {
-				return response.json();
-			})
+			.then(response => response.json())
 			.then(jsonResponse => {
 				if (jsonResponse.business) {
 					return jsonResponse.businesses.map(business => ({
